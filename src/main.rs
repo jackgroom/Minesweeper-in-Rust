@@ -11,8 +11,8 @@ use crossterm::event::{poll, read, Event, KeyEventKind, KeyCode};
 use std::time::Duration;
 use crossterm::terminal::{disable_raw_mode, enable_raw_mode};
 
-const WIDTH: usize = 10;
-const HEIGHT: usize = 5;
+const WIDTH: usize = 30;
+const HEIGHT: usize = 20;
 
 fn setup_input_event(board: &mut Board) -> crossterm::Result<()> {
     loop {
@@ -25,8 +25,8 @@ fn setup_input_event(board: &mut Board) -> crossterm::Result<()> {
                             KeyCode::Char('a') => { board.update_player_pos(Vec2::new(-1, 0)) }
                             KeyCode::Char('s') => { board.update_player_pos(Vec2::new(0, 1)) }
                             KeyCode::Char('d') => { board.update_player_pos(Vec2::new(1, 0)) }
-                            KeyCode::Char('f') => { println!("f") }
-                            KeyCode::Char(' ') => { println!("space") }
+                            KeyCode::Char('f') => { board.toggle_cell_flag() }
+                            KeyCode::Char(' ') => { board.show_cell() }
                             _ => {}
                         }
                         board.display();
